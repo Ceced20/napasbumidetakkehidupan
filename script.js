@@ -1,7 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
+     if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            // Let Formspree handle the submission
+            // We'll just add some UI feedback here
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            // We'll re-enable the button after submission
+            // Note: Formspree will handle the actual redirect
+            setTimeout(() => {
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }, 3000);
+        });
+    }
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');

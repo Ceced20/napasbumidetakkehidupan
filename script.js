@@ -1,23 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
-     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            // Let Formspree handle the submission
-            // We'll just add some UI feedback here
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-            
-            // We'll re-enable the button after submission
-            // Note: Formspree will handle the actual redirect
-            setTimeout(() => {
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
-            }, 3000);
-        });
-    }
+     
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -128,24 +112,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+            // Let Formspree handle the submission
+            // We'll just add some UI feedback here
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
             
-            const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const message = document.getElementById('contactMessage').value;
-            
-            // Direct mailto link
-            const subject = encodeURIComponent('NBDK Show Contact Form');
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
-            
-            // Open default email client
-            window.open(`mailto:xavierceceda@gmail.com?subject=${subject}&body=${body}`, '_blank');
-            
-            // Form feedback
-            alert('Your message has been sent! We will get back to you soon.');
-            
-            // Reset form
-            contactForm.reset();
+            // We'll re-enable the button after submission
+            // Note: Formspree will handle the actual redirect
+            setTimeout(() => {
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }, 3000);
         });
     }
     

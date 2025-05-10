@@ -62,23 +62,31 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateCountdown, 1000);
     
     // Schedule Tab Switching
-    const scheduleTabs = document.querySelectorAll('.schedule-tab');
-    const timelines = document.querySelectorAll('.timeline');
-    
-    scheduleTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            // Remove active class from all tabs
-            scheduleTabs.forEach(t => t.classList.remove('active'));
-            // Add active class to clicked tab
-            this.classList.add('active');
-            
-            // Hide all timelines
-            timelines.forEach(timeline => timeline.classList.remove('active'));
-            // Show timeline corresponding to clicked tab
-            const targetDate = this.getAttribute('data-date');
-            document.getElementById(targetDate).classList.add('active');
-        });
+  const scheduleTabs = document.querySelectorAll('.schedule-tab');
+  const timelineContainers = document.querySelectorAll('.timeline');
+  const dateDisplay = document.querySelector('.date-container span');
+  
+  scheduleTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab
+      scheduleTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Show selected timeline
+      const dateId = tab.getAttribute('data-date');
+      timelineContainers.forEach(timeline => {
+        timeline.classList.remove('active');
+      });
+      document.getElementById(dateId).classList.add('active');
+      
+      // Update the date display
+      if (dateId === 'may-27') {
+        dateDisplay.textContent = 'May 27, 2025';
+      } else {
+        dateDisplay.textContent = 'May 28, 2025';
+      }
     });
+  });
     
     // Gallery Modal
     const galleryItems = document.querySelectorAll('.gallery-item');
